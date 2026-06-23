@@ -49,3 +49,8 @@ plt.show()
 # Cluster 1 Centroid: [6.85384615 3.07692308 5.71538462 2.05384615]
 # Cluster 2 Centroid: [5.88360656 2.74098361 4.38852459 1.43442623]
 # Cluster 3 Centroid: [5.006 3.428 1.462 0.246]
+
+
+#axis=0 → data points
+#axis=1 → centroids
+#axis=2 → features
