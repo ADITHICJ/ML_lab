@@ -14,7 +14,8 @@ centroids = X[:k]
 for _ in range(100):
 
     # Calculate distances from each point to each centroid
-    distances = np.sqrt(((X[:, np.newaxis] - centroids) ** 2).sum(axis=2))
+    #distances = np.sqrt(((X[:, np.newaxis] - centroids) ** 2).sum(axis=2))
+    distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
 
     # Assign points to nearest centroid
     labels = np.argmin(distances, axis=1)
