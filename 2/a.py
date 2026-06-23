@@ -30,13 +30,11 @@ def best_first_search(graph, heuristic, start, goal):
 
 graph = {}
 heuristic = {}
-nodes = []
 
 n = int(input("Enter number of nodes: "))
 
 for i in range(n):
     node = input("Enter node name: ")
-    nodes.append(node)
 
     neighbors = input(f"Enter neighbors of {node} separated by comma: ")
 
@@ -47,7 +45,7 @@ for i in range(n):
 
 print("\nEnter heuristic values:")
 
-for node in nodes:
+for node in graph:
     heuristic[node] = int(input(f"Enter heuristic for {node}: "))
 
 start = input("\nEnter start node: ")
