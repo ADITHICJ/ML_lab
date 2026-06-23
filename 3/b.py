@@ -62,7 +62,8 @@ if path:
 else:
     print("No path found")
     
-"""Enter number of nodes: 6
+"""
+Enter number of nodes: 4
 
 Enter node name: A
 Enter number of neighbours of A: 2
@@ -72,38 +73,27 @@ Enter neighbour name: C
 Enter cost: 4
 
 Enter node name: B
-Enter number of neighbours of B: 2
+Enter number of neighbours of B: 1
 Enter neighbour name: D
 Enter cost: 2
-Enter neighbour name: E
-Enter cost: 5
 
 Enter node name: C
 Enter number of neighbours of C: 1
-Enter neighbour name: F
-Enter cost: 3
+Enter neighbour name: D
+Enter cost: 1
 
 Enter node name: D
 Enter number of neighbours of D: 0
 
-Enter node name: E
-Enter number of neighbours of E: 1
-Enter neighbour name: F
-Enter cost: 1
-
-Enter node name: F
-Enter number of neighbours of F: 0
-
-Enter heuristic value of A: 7
-Enter heuristic value of B: 6
-Enter heuristic value of C: 2
-Enter heuristic value of D: 1
-Enter heuristic value of E: 1
-Enter heuristic value of F: 0
+Enter heuristic value of A: 3
+Enter heuristic value of B: 2
+Enter heuristic value of C: 1
+Enter heuristic value of D: 0
 
 Enter start node: A
-Enter goal node: F
+Enter goal node: D
 
 Path Found:
-A -> B -> E -> F
-Total Cost = 7"""
+A -> B -> D
+Total Cost = 3
+"""
