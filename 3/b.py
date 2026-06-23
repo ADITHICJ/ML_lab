@@ -28,8 +28,8 @@ def a_star(graph, heuristic, start, goal):
     return None, None
 
 
-# Input Graph
 graph = {}
+heuristic = {}
 
 n = int(input("Enter number of nodes: "))
 
@@ -44,13 +44,12 @@ for i in range(n):
         cost = int(input("Enter cost: "))
         graph[node].append((neighbor, cost))
 
-# Heuristic values
-heuristic = {}
+print("\nEnter heuristic values:")
 
 for node in graph:
-    heuristic[node] = int(input(f"Enter heuristic value of {node}: "))
+    heuristic[node] = int(input(f"Enter heuristic for {node}: "))
 
-start = input("Enter start node: ")
+start = input("\nEnter start node: ")
 goal = input("Enter goal node: ")
 
 path, total_cost = a_star(graph, heuristic, start, goal)
