@@ -60,45 +60,32 @@ if path:
 else:
     print("\nNo path found")
     
-# Example Input:
-#
-# Enter number of nodes: 7
-#
-# Enter node name: A
-# Enter neighbors of A separated by comma: B,C
-#
-# Enter node name: B
-# Enter neighbors of B separated by comma: D,E
-#
-# Enter node name: C
-# Enter neighbors of C separated by comma: F
-#
-# Enter node name: D
-# Enter neighbors of D separated by comma:
-#
-# Enter node name: E
-# Enter neighbors of E separated by comma: G
-#
-# Enter node name: F
-# Enter neighbors of F separated by comma:
-#
-# Enter node name: G
-# Enter neighbors of G separated by comma:
-#
-# Enter heuristic for A: 6
-# Enter heuristic for B: 4
-# Enter heuristic for C: 5
-# Enter heuristic for D: 3
-# Enter heuristic for E: 2
-# Enter heuristic for F: 4
-# Enter heuristic for G: 0
-#
-# Enter start node: A
-# Enter goal node: G
+"""
+Enter number of nodes: 4
 
-# Visiting: A
-# Visiting: B
-# Visiting: E
-# Visiting: G
+Enter node name: A
+Enter neighbors of A separated by comma: B,C
 
-# Path found: A -> B -> E -> G
+Enter node name: B
+Enter neighbors of B separated by comma: D
+
+Enter node name: C
+Enter neighbors of C separated by comma: D
+
+Enter node name: D
+Enter neighbors of D separated by comma:
+
+Enter heuristic values:
+Enter heuristic for A: 3
+Enter heuristic for B: 1
+Enter heuristic for C: 2
+Enter heuristic for D: 0
+
+Enter start node: A
+Enter goal node: D
+
+Visiting: A
+Visiting: B
+Visiting: D
+
+Path found: A -> B -> D """
