@@ -4,54 +4,44 @@ def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 class Perceptron:
-    def __init__(self, input_size):
-        self.weights = np.random.rand(input_size)
-        self.bias = np.random.rand()   # Scalar bias
+    def __init__(self, n):
+        self.w = np.random.rand(n)
+        self.b = np.random.rand()
 
-    def forward(self, inputs):
-        total_input = np.dot(inputs, self.weights) + self.bias
-        output = sigmoid(total_input)
-        return output
+    def forward(self, x):
+        return sigmoid(np.dot(x, self.w) + self.b)
 
-    def train(self, X, y, epochs=1000, learning_rate=0.1):
-        for epoch in range(epochs):
-            for i in range(X.shape[0]):
-                output = self.forward(X[i])
-                error = y[i] - output
+    def train(self, X, y, epochs=1000, lr=0.1):
+        for _ in range(epochs):
+            for i in range(len(X)):
+                error = y[i] - self.forward(X[i])
+                self.w += lr * error * X[i]
+                self.b += lr * error
 
-                self.weights += learning_rate * error * X[i]
-                self.bias += learning_rate * error
+X = np.array([[0,0],[0,1],[1,0],[1,1]])
 
-# Input data
-X_and = np.array([
-    [0, 0],
-    [0, 1],
-    [1, 0],
-    [1, 1]
-])
+data = {
+    "AND": np.array([0,0,0,1]),
+    "OR":  np.array([0,1,1,1])
+}
 
-# AND outputs
-y_and = np.array([0, 0, 0, 1])
+for gate, y in data.items():
+    p = Perceptron(2)
+    p.train(X, y)
 
-# OR outputs
-y_or = np.array([0, 1, 1, 1])
+    print(f"\n{gate} Gate:")
+    for x in X:
+        print(x, "->", round(p.forward(x)))
 
-# Create perceptrons
-perceptron_and = Perceptron(input_size=2)
-perceptron_or = Perceptron(input_size=2)
 
-# Train perceptrons
-perceptron_and.train(X_and, y_and, epochs=1000, learning_rate=0.1)
-perceptron_or.train(X_and, y_or, epochs=1000, learning_rate=0.1)
+# AND Gate:
+# [0 0] -> 0
+# [0 1] -> 0
+# [1 0] -> 0
+# [1 1] -> 1
 
-# Test AND gate
-print("AND Function Predictions:")
-for i in range(X_and.shape[0]):
-    prediction = round(perceptron_and.forward(X_and[i]))
-    print("Input:", X_and[i], "- Predicted Output:", prediction)
-
-# Test OR gate
-print("\nOR Function Predictions:")
-for i in range(X_and.shape[0]):
-    prediction = round(perceptron_or.forward(X_and[i]))
-    print("Input:", X_and[i], "- Predicted Output:", prediction)
+# OR Gate:
+# [0 0] -> 0
+# [0 1] -> 1
+# [1 0] -> 1
+# [1 1] -> 1

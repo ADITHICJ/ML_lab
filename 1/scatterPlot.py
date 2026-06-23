@@ -1,16 +1,20 @@
-from sklearn.datasets import load_iris
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-iris = load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-df["Species"] = iris.target
+n = 100
 
-sns.scatterplot(data=df,
-                x="sepal length (cm)",
-                y="sepal width (cm)",
-                hue="Species")
+data = pd.DataFrame()
 
-plt.title("Iris Scatter Plot")
+for c in ['X', 'Y']:
+    data[c] = np.random.normal(size=n)
+
+data['Category'] = np.random.choice(['A', 'B', 'C'], n)
+
+sns.scatterplot(data=data, x='X', y='Y', hue='Category')
+
+plt.title("Scatter Plot")
+plt.xlabel("X")
+plt.ylabel("Y")
 plt.show()

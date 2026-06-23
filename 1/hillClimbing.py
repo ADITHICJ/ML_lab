@@ -1,27 +1,3 @@
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-n = 100
-data = pd.DataFrame({
-  'X': np.random.normal(0, 1, n),
-  'Y': np.random.normal(0, 1, n),
-  'Z': np.random.normal(0, 1, n),
-  'Category': np.random.choice(['A', 'B', 'C'], n)
-})
-
-print(data)
-
-def scatter_plot():
-  plt.figure(figsize=(6, 4))
-  sns.scatterplot(data=data, x='X', y='Y', hue='Category')
-  plt.title("2D Scatter Plot")
-  plt.show()
-
-scatter_plot()
-
 import random
 
 def objective_function(x):

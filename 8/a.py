@@ -1,36 +1,51 @@
-import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
-from sklearn.cluster import KMeans
-from sklearn.metrics import accuracy_score, confusion_matrix
-from scipy.stats import mode
+import matplotlib.pyplot as plt
 
+# Load Iris Dataset
 iris = load_iris()
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-y_true = iris.target
+X = iris.data
 
-X_plot = X.iloc[:, [0, 1]]
+k = 3
 
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-kmeans.fit(X_plot)
-y_pred = kmeans.labels_
-centroids = kmeans.cluster_centers_
+# Select first k points as initial centroids
+centroids = X[:k]
 
-labels = np.zeros_like(y_pred)
-for i in range(3):
-  mask = (y_pred == i)
-  labels[mask] = mode(y_true[mask], keepdims=True)[0]
+for _ in range(100):
 
-print("Accuracy (after remapping cluster labels):", accuracy_score(y_true, labels))
-print("Confusion Matrix:")
-print(confusion_matrix(y_true, labels))
+    # Calculate distances from each point to each centroid
+    distances = np.sqrt(((X[:, np.newaxis] - centroids) ** 2).sum(axis=2))
 
-plt.scatter(X_plot.iloc[:, 0], X_plot.iloc[:, 1], c=labels, cmap='viridis', s=50)
-plt.scatter(centroids[:, 0], centroids[:, 1], marker='x', color='red', s=200, label='Centroids')
-plt.xlabel('Sepal Length (cm)')
-plt.ylabel('Sepal Width (cm)')
-plt.title('K-Means Clustering of Iris Dataset')
-plt.legend()
-plt.grid(True)
+    # Assign points to nearest centroid
+    labels = np.argmin(distances, axis=1)
+
+    # Compute new centroids
+    new_centroids = []
+
+    for i in range(k):
+        cluster_points = X[labels == i]
+        new_centroids.append(cluster_points.mean(axis=0))
+
+    new_centroids = np.array(new_centroids)
+
+    # Stop if centroids do not change
+    if np.allclose(centroids, new_centroids):
+        break
+
+    centroids = new_centroids
+
+print("\nFinal Centroids:")
+for i in range(k):
+    print(f"Cluster {i+1} Centroid: {centroids[i]}")
+
+plt.scatter(X[:, 0], X[:, 1], c=labels)
+plt.scatter(centroids[:, 0], centroids[:, 1], marker='X', s=200)
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.title("K-Means Clustering on Iris Dataset")
 plt.show()
+
+# Final Centroids:
+# Cluster 1 Centroid: [6.85384615 3.07692308 5.71538462 2.05384615]
+# Cluster 2 Centroid: [5.88360656 2.74098361 4.38852459 1.43442623]
+# Cluster 3 Centroid: [5.006 3.428 1.462 0.246]
