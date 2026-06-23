@@ -27,4 +27,13 @@ else:
 Enter 8 leaf node scores:
 3 5 2 9 12 5 23 23
 Optimal value using Minimax: 12
+
+
+                    MAX
+                /         \
+              MIN         MIN
+            /    \       /    \
+          MAX    MAX   MAX    MAX
+         / \     / \   / \    / \
+        3   5   2   9 12  5 23 23
 """
