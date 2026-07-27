@@ -1,20 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 
-x = y = np.linspace(-3, 3, 100)
-X, Y = np.meshgrid(x, y)
-Z = np.sin(np.sqrt(X**2 + Y**2))
+X = load_iris().data
+x = X[:, 2]
+y = X[:, 3]
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+Xg, Yg = np.meshgrid(
+    np.linspace(min(x), max(x), 50),
+    np.linspace(min(y), max(y), 50)
+)
 
-surf = ax.plot_surface(X, Y, Z, cmap='viridis')
+Z = np.sin(Xg) * np.cos(Yg)
 
-fig.colorbar(surf)
+ax = plt.axes(projection='3d')
+ax.plot_surface(Xg, Yg, Z)
 
-ax.set_title("3D Surface Plot")
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_zlabel("Z")
-
+plt.title("3D Surface Plot")
 plt.show()
