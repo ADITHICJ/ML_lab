@@ -1,30 +1,27 @@
 import random
 
 def objective_function(x):
-  return -x ** 2 + 5
+    return -x**2 + 5
 
 def hill_climbing(start_x, step_size, max_iterations):
-  current_x = start_x
-  current_score = objective_function(current_x)
+    current_x = start_x
+    current_score = objective_function(current_x)
 
-  for i in range(max_iterations):
-    new_x = current_x + random.uniform(-step_size, step_size)
-    new_score = objective_function(new_x)
+    for i in range(max_iterations):
+        new_x = current_x + random.uniform(-step_size, step_size)
+        new_score = objective_function(new_x)
 
-    print(f"Iteration {i + 1}: x = {current_x:.4f}, f(x) = {current_score:.4f}")
+        if new_score > current_score:
+            current_x = new_x
+            current_score = new_score
 
-    if new_score > current_score:
-      current_x = new_x
-      current_score = new_score
-    else:
-      pass
-  
-  print("\nFinal Solution:")
-  print(f"x = {current_x:.4f}, f(x) = {current_score:.4f}")
-  return current_x, current_score
+        print(f"Iteration {i + 1}: x = {current_x:.4f}, f(x) = {current_score:.4f}")
 
-best_x, best_score = hill_climbing(start_x=0.1, step_size=0.05, max_iterations=5)
+    print("\nFinal Solution:")
+    print(f"x = {current_x:.4f}, f(x) = {current_score:.4f}")
 
+
+hill_climbing(start_x=3, step_size=0.5, max_iterations=20)
 
 
 
@@ -48,27 +45,29 @@ best_x, best_score = hill_climbing(start_x=0.1, step_size=0.05, max_iterations=5
 
 # The scatter plot visualizes the relationship between two dimensions (X and Y) of an n-dimensional dataset.
 
-
 """
-           X         Y         Z Category
-0   0.496714 -1.415371  0.357787        A
-1  -0.138264 -0.420645  0.560785        B
-2   0.647689 -0.342715  1.083051        A
-3   1.523030 -0.802277  1.053802        A
-4  -0.234153 -0.161286 -1.377669        C
-..       ...       ...       ...      ...
-95 -1.463515  0.385317 -0.692910        C
-96  0.296120 -0.883857  0.899600        C
-97  0.261055  0.153725  0.307300        A
-98  0.005113  0.058209  0.812862        B
-99 -0.234587 -1.142970  0.629629        C
-
-[100 rows x 4 columns]
-Iteration 1: x = 0.1000, f(x) = 4.9900
-Iteration 2: x = 0.1000, f(x) = 4.9900
-Iteration 3: x = 0.1000, f(x) = 4.9900
-Iteration 4: x = 0.0905, f(x) = 4.9918
-Iteration 5: x = 0.0894, f(x) = 4.9920
+Iteration 1: x = 2.7594, f(x) = -2.6143
+Iteration 2: x = 2.7594, f(x) = -2.6143
+Iteration 3: x = 2.5147, f(x) = -1.3237
+Iteration 4: x = 2.2006, f(x) = 0.1574
+Iteration 5: x = 1.8372, f(x) = 1.6259
+Iteration 6: x = 1.8372, f(x) = 1.6259
+Iteration 7: x = 1.4875, f(x) = 2.7873
+Iteration 8: x = 1.4875, f(x) = 2.7873
+Iteration 9: x = 1.1104, f(x) = 3.7670
+Iteration 10: x = 0.7898, f(x) = 4.3762
+Iteration 11: x = 0.5235, f(x) = 4.7259
+Iteration 12: x = 0.5235, f(x) = 4.7259
+Iteration 13: x = 0.3028, f(x) = 4.9083
+Iteration 14: x = 0.3028, f(x) = 4.9083
+Iteration 15: x = 0.1786, f(x) = 4.9681
+Iteration 16: x = 0.0912, f(x) = 4.9917
+Iteration 17: x = 0.0524, f(x) = 4.9973
+Iteration 18: x = 0.0189, f(x) = 4.9996
+Iteration 19: x = 0.0189, f(x) = 4.9996
+Iteration 20: x = 0.0065, f(x) = 5.0000
 
 Final Solution:
-x = 0.0807, f(x) = 4.9935"""
+x = 0.0065
+f(x) = 5.0000
+"""
