@@ -3,18 +3,16 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 
 X = load_iris().data
-x = X[:, 2]
-y = X[:, 3]
 
-Xg, Yg = np.meshgrid(
-    np.linspace(min(x), max(x), 50),
-    np.linspace(min(y), max(y), 50)
-)
+x = np.linspace(min(X[:, 2]), max(X[:, 2]), 50)
+y = np.linspace(min(X[:, 3]), max(X[:, 3]), 50)
 
-Z = np.sin(Xg) * np.cos(Yg)
+x, y = np.meshgrid(x, y)
+
+z = np.sin(x) * np.cos(y)
 
 ax = plt.axes(projection='3d')
-ax.plot_surface(Xg, Yg, Z)
+ax.plot_surface(x, y, z)
 
 plt.title("3D Surface Plot")
 plt.show()
