@@ -29,9 +29,13 @@ def alphabeta(depth, node, is_max, scores, max_depth, alpha, beta):
 
 
 depth = int(input("Enter tree depth: "))
-scores = list(map(int, input("Enter leaf scores: ").split()))
 
-if len(scores) == 2 ** depth:
+num_leaves = 2 ** depth
+print(f"Enter {num_leaves} leaf node scores:")
+
+scores = list(map(int, input().split()))
+
+if len(scores) == num_leaves:
     print("Optimal value:", 
         alphabeta(0, 0, True, scores, depth, float('-inf'), float('inf')
     ))
