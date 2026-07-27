@@ -1,49 +1,59 @@
 import numpy as np
-from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 
-# Load Iris Dataset
+# Load Iris dataset
 iris = load_iris()
 X = iris.data
 
-k = 3
+# Number of clusters
+k = int(input("Enter number of clusters: "))
 
-# Select first k points as initial centroids
-centroids = X[:k]
+# Random initialization of centroids
+np.random.seed(42)
+indices = np.random.choice(len(X), k, replace=False)
+centroids = X[indices]
 
+# K-Means Algorithm
 for _ in range(100):
 
-    # Calculate distances from each point to each centroid
-    #distances = np.sqrt(((X[:, np.newaxis] - centroids) ** 2).sum(axis=2))
+    # Compute distances
     distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
 
-    # Assign points to nearest centroid
+    # Assign clusters
     labels = np.argmin(distances, axis=1)
 
-    # Compute new centroids
+    # Update centroids
     new_centroids = []
 
     for i in range(k):
         cluster_points = X[labels == i]
-        new_centroids.append(cluster_points.mean(axis=0))
+
+        if len(cluster_points) > 0:
+            new_centroids.append(cluster_points.mean(axis=0))
+        else:
+            new_centroids.append(centroids[i])
 
     new_centroids = np.array(new_centroids)
 
-    # Stop if centroids do not change
+    # Stop if centroids don't change
     if np.allclose(centroids, new_centroids):
         break
 
     centroids = new_centroids
 
+# Print centroids
 print("\nFinal Centroids:")
 for i in range(k):
-    print(f"Cluster {i+1} Centroid: {centroids[i]}")
+    print(f"Cluster {i+1}: {centroids[i]}")
 
-plt.scatter(X[:, 0], X[:, 1], c=labels)
-plt.scatter(centroids[:, 0], centroids[:, 1], marker='X', s=200)
+# Plot
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
+plt.scatter(centroids[:, 0], centroids[:, 1],
+            marker='X', s=200, color='red')
 plt.xlabel("Sepal Length")
 plt.ylabel("Sepal Width")
-plt.title("K-Means Clustering on Iris Dataset")
+plt.title("K-Means (Random Initialization)")
 plt.show()
 
 # Final Centroids:
