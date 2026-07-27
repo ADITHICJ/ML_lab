@@ -25,7 +25,7 @@ def plot_dendrogram(data, method):
 
 print("Proximity matrix:")
 pm = proximity_matrix(data)
-print(proximity_matrix(data))
+print(pm)
 
 plot_dendrogram(data, 'single')
 plot_dendrogram(data, 'complete')
