@@ -1,13 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 
-x = y = np.linspace(-3, 3, 100)
-X, Y = np.meshgrid(x, y)
-Z = np.sin(np.sqrt(X**2 + Y**2))
+X = load_iris().data
 
-plt.contour(X, Y, Z)
+x = np.linspace(min(X[:, 2]), max(X[:, 2]), 50)
+y = np.linspace(min(X[:, 3]), max(X[:, 3]), 50)
 
-plt.title("Contour Plot")
-plt.xlabel("X")
-plt.ylabel("Y")
+x, y = np.meshgrid(x, y)
+
+z = np.sin(x) * np.cos(y)
+
+plt.contourf(x, y, z, cmap="viridis")
+
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
+plt.title("Contour Plot of Iris Dataset")
+
 plt.show()
