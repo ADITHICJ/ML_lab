@@ -1,18 +1,11 @@
-import numpy as np
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
 
-n = 100
+X = load_iris().data
 
-data = pd.DataFrame()
+sns.heatmap(X, cmap="viridis")
 
-for c in ['X', 'Y', 'Z']:
-    data[c] = np.random.normal(size=n)
+plt.title("Heat Map of Iris Dataset")
 
-sns.heatmap(data.corr(), annot=True)
-
-plt.title("Heatmap")
-plt.xlabel("Features")
-plt.ylabel("Features")
 plt.show()
