@@ -1,18 +1,9 @@
-import numpy as np
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 
-n = 100
+X = load_iris().data
 
-data = pd.DataFrame()
+plt.boxplot(X, labels=["Sepal L", "Sepal W", "Petal L", "Petal W"])
 
-for c in ['X', 'Y', 'Z']:
-    data[c] = np.random.normal(size=n)
-
-sns.boxplot(data=data)
-
-plt.title("Box Plot")
-plt.xlabel("Features")
-plt.ylabel("Values")
+plt.title("Box Plot of Iris Dataset")
 plt.show()
